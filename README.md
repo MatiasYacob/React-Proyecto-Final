@@ -1,24 +1,25 @@
-Proyecto Final del curso Reacto de CoderHouse 
-Alumno: Matias Yacob
+Proyecto Final del curso React de CoderHouse
+Alumno: Matías Yacob
 
-Descripcion: simula un Ecomerse para una empresa de venta de cosmeticos automotor
-            muestra los productos en pantalla, los carga a un componente "Cart" 
-            y finaliza la compra con un formulario de datos de usuario entregando un "ID" final de compra.
+Descripción: simula un E-commerce para una empresa de venta de cosméticos automotor. Muestra los productos en pantalla, los carga a un componente "Cart" y finaliza la compra con un formulario de datos de usuario entregando un "ID" final de compra.
 
-Consideraciones: 
+Consideraciones:
 
-    Para utilizar este codigo tendra que instalar los siguientes modulos:
+Para utilizar este código, deberá instalar los siguientes módulos:
 
+React:
+- `npm install react`
+- `npm install react-dom`
+- `npm install react-scripts`
 
-        React:  npm install react
-                npm install react-dom
-                npm install react-scripts
+React Router:
+- `npm install react-router-dom`
 
-        Reactrouter:npm install react-router-dom
+Bulma:
+- `npm install bulma`
 
-        Bulma: npm install bulma
+Firebase:
+- `npm install firebase`
 
-        Firebase: npm install firebase
-
-    Finalidad del proyecto: a modo evaluatorio para el curso de react
+Finalidad del proyecto: a modo evaluatorio para el curso de React.
 
