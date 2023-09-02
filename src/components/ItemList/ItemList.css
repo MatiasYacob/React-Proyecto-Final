@@ -1,4 +1,12 @@
 .ListGroup{
-    display: flex;
-    font-weight: bolder;
+   display: flex;
+   flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.36);
+   
+}
+div{
+    
+    flex: 1;
+    margin: 10px;
+    text-align: center;
 }

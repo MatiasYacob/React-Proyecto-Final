@@ -1,30 +1,46 @@
-import { useState, useEffect } from "react"
-import {getProductsByCategory, getProducts} from '../../asyncMock'
-import ItemList from '../ItemList/ItemList'
-import { useParams } from "react-router-dom"
+import { useState, useEffect } from "react";
+import ItemList from "../ItemList/ItemList";
+import { useParams } from "react-router-dom";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../../services/fireBase/firebaseConfig";
 
-const ItemListContainer = ({ greeting }) =>{
-    const [products, setProducts] = useState([])
-    
-    const {categoryId} =useParams()
+const ItemListContainer = ({ greeting }) => {
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        const asyncFunc = categoryId ? getProductsByCategory : getProducts
+  const { itemId } = useParams();
 
-        asyncFunc(categoryId)
-            .then(response=>{
-                setProducts(response)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }, [categoryId])
-    return (
-        <div >
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
-        </div>
-    )
-}
+  useEffect(() => {
+    setLoading(true);
 
-export default ItemListContainer
+    const collectionRef = itemId
+      ? query(collection(db, "productos"), where("categoria", "==", itemId))
+      : collection(db, "productos");
+
+    getDocs(collectionRef)
+      .then((response) => {
+        const productosAdapted = response.docs.map((doc) => {
+          const data = doc.data();
+          return { id: doc.id, ...data };
+        });
+        
+        // Set the adapted productos in the state
+        setProductos(productosAdapted);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [itemId]); // Make sure to add itemId as a dependency for re-fetching when it changes
+
+  return (
+    <div>
+      {/* Render your components here */}
+      <ItemList productos={productos} loading={loading} />
+    </div>
+  );
+};
+
+export default ItemListContainer;
